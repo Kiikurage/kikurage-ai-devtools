@@ -43,8 +43,5 @@ description: 複数の画像を、番号・ラベル・パス付きで 1 枚に�
 
 ## 作り直すとき
 
-ソースは `src/`（Go）。直したら、スキルに同梱するバイナリを作り直す。
-
-```sh
-cd skills/compare-imgs/src && go build -o ../bin/compare_imgs .   # リポジトリのルートから
-```
+ソースは `src/`（Go）。直したら、リポジトリのルートで `scripts/build.sh` を実行し、同梱するバイナリを全アーキテクチャ分作り直す。
+`bin/compare_imgs` は OS とアーキテクチャを見て `bin/compare_imgs-<os>-<arch>` を呼ぶラッパー。

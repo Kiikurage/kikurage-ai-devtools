@@ -10,6 +10,7 @@
 package main
 
 import (
+	_ "embed"
 	"fmt"
 	"image"
 	"image/color"
@@ -23,7 +24,6 @@ import (
 
 	"golang.org/x/image/draw"
 	"golang.org/x/image/font"
-	"golang.org/x/image/font/gofont/gobold"
 	"golang.org/x/image/font/opentype"
 	"golang.org/x/image/math/fixed"
 	_ "golang.org/x/image/webp"
@@ -37,7 +37,7 @@ const usage = `使い方: compare_imgs [-w 幅px] [-h 高さpx] [--gap px] [--bg
   -i         画像のパスと、任意のラベル。ラベルは次の引数が - で始まらなければラベルとみなす
   --gap      画像の間の余白（既定 8）
   --bg       背景色（white / black / #rrggbb。既定 white）
-  --font     ラベルのフォント（.ttf / .otf / .ttc。既定はヒラギノ角ゴシック W6）
+  --font     ラベルのフォント（.ttf / .otf / .ttc。既定はヒラギノ角ゴシック W6、無ければ同梱の BIZ UDPゴシック）
 `
 
 type item struct {
@@ -358,6 +358,11 @@ func drawLabel(dst *image.RGBA, cell image.Rectangle, label string, face font.Fa
 }
 
 // labelFace はラベルのフォントを読む。指定が無ければヒラギノ、それも無ければ Go の欧文フォント（日本語は出ない）。
+// BIZ UDPゴシック Bold（SIL OFL 1.1。ライセンスは fonts/OFL.txt）
+//
+//go:embed fonts/BIZUDPGothic-Bold.ttf
+var embeddedFont []byte
+
 func labelFace(path string, size float64) font.Face {
 	opts := &opentype.FaceOptions{Size: size, DPI: 72, Hinting: font.HintingFull}
 	candidates := []string{path}
@@ -386,7 +391,8 @@ func labelFace(path string, size float64) font.Face {
 			return face
 		}
 	}
-	f, _ := opentype.Parse(gobold.TTF)
+	// ヒラギノが無い環境（Linux など）では、埋め込んだ BIZ UDPゴシック を使う
+	f, _ := opentype.Parse(embeddedFont)
 	face, _ := opentype.NewFace(f, opts)
 	return face
 }

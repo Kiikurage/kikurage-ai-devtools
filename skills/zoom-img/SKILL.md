@@ -55,8 +55,5 @@ px 85,110	RGB(243, 230, 234)	α=255
 
 ## 作り直すとき
 
-ソースは `src/`（Go）。直したら、スキルに同梱するバイナリを作り直す。
-
-```sh
-cd skills/zoom-img/src && go build -o ../bin/zoom_img .   # リポジトリのルートから
-```
+ソースは `src/`（Go）。直したら、リポジトリのルートで `scripts/build.sh` を実行し、同梱するバイナリを全アーキテクチャ分作り直す。
+`bin/zoom_img` は OS とアーキテクチャを見て `bin/zoom_img-<os>-<arch>` を呼ぶラッパー。

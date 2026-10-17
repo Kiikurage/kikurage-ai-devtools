@@ -49,6 +49,13 @@ claude plugin install kikurage-ai-devtools@kikurage-ai-devtools --scope user
 
 インストールし直さずに一度だけ試すなら、`claude --plugin-dir /Users/kikurage/workspace/kikurage-ai-devtools` でも読み込める。
 
+### バイナリを作り直す
+
+`skills/*/src`（Go）を直したら、`scripts/build.sh` で全アーキテクチャ分をビルドする。
+`skills/*/bin/<名前>-<os>-<arch>` が実体で、`bin/<名前>` は OS とアーキテクチャを見て実体を呼ぶラッパー（`scripts/dispatch.sh` のコピー）。
+
+compare-imgs は、ヒラギノが無い環境ではラベルに BIZ UDPゴシック Bold（SIL OFL 1.1、`skills/compare-imgs/src/fonts/`）を使う。バイナリに埋め込んである。
+
 ### バージョンの付け方
 
 形式は `x.y.z` だが、semver の意味づけには従わない。
@@ -60,5 +67,5 @@ claude plugin install kikurage-ai-devtools@kikurage-ai-devtools --scope user
 
 ## 制限
 
-- `skills/*/bin/` のバイナリは macOS arm64 用。ほかの環境では `skills/*/src`（Go）からビルドし直す必要がある
+- 同梱のバイナリは macOS arm64・Linux amd64・Linux arm64 の 3 つ。ほかの環境では動かない
 - フックは `python3` を使う
