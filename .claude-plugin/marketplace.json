@@ -1,0 +1,16 @@
+{
+  "name": "kikurage-ai-devtools",
+  "owner": {
+    "name": "ykikura"
+  },
+  "metadata": {
+    "description": "kikurage の Claude Code 用プラグイン"
+  },
+  "plugins": [
+    {
+      "name": "kikurage-ai-devtools",
+      "source": "./",
+      "description": "kikurage の Claude Code 用スキル・フック・作業方針をまとめたプラグイン"
+    }
+  ]
+}
