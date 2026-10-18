@@ -1,5 +1,5 @@
 #!/bin/sh
-# 同じディレクトリにある <自分の名前>-<os>-<arch> を呼ぶ。scripts/build.sh が skills/*/bin/ にコピーする。
+# ../libexec/<自分の名前>-<os>-<arch> を呼ぶ。scripts/build.sh が bin/ にコピーする。
 set -eu
 
 os=$(uname -s | tr '[:upper:]' '[:lower:]')
@@ -18,9 +18,10 @@ while [ -L "$self" ]; do
 	esac
 done
 
-exe="$(dirname "$self")/$(basename "$self")-$os-$arch"
+name=$(basename "$self")
+exe="$(dirname "$self")/../libexec/$name-$os-$arch"
 if [ ! -x "$exe" ]; then
-	echo "$(basename "$self"): $os/$arch 用のバイナリがありません（$exe）" >&2
+	echo "$name: $os/$arch 用のバイナリがありません（$exe）" >&2
 	exit 1
 fi
 exec "$exe" "$@"

@@ -5,12 +5,12 @@ description: 画像の一部を切り出し、元画像の px 座標の目盛り
 
 # zoom-img
 
-同梱のバイナリ `bin/zoom_img` で、画像の一部を目盛り付きで拡大する。
+プラグインに同梱したコマンド `zoom_img` で、画像の一部を目盛り付きで拡大する。
 
-このスキルのベースディレクトリ（スキルを読み込んだときに示される「Base directory for this skill」）を `D` として、`$D/bin/zoom_img` を呼ぶ。
+プラグインが有効な間は PATH に入っているので、名前だけで呼べる。
 
 ```sh
-"$D/bin/zoom_img" -i 画像 [--at X,Y] [--win px] [--size px] [--mark X,Y ...] [--px X,Y ...] [--smooth] -o 出力
+zoom_img -i 画像 [--at X,Y] [--win px] [--size px] [--mark X,Y ...] [--px X,Y ...] [--smooth] -o 出力
 ```
 
 - `-i`：元の画像。拡張子の無いパスには `.png` を補う
@@ -56,4 +56,4 @@ px 85,110	RGB(243, 230, 234)	α=255
 ## 作り直すとき
 
 ソースは `src/`（Go）。直したら、リポジトリのルートで `scripts/build.sh` を実行し、同梱するバイナリを全アーキテクチャ分作り直す。
-`bin/zoom_img` は OS とアーキテクチャを見て `bin/zoom_img-<os>-<arch>` を呼ぶラッパー。
+`bin/zoom_img`（プラグインのルート）は、OS とアーキテクチャを見て `libexec/zoom_img-<os>-<arch>` を呼ぶラッパー。

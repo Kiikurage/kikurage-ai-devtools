@@ -5,12 +5,12 @@ description: 複数の画像を、番号・ラベル・パス付きで 1 枚に�
 
 # compare-imgs
 
-同梱のバイナリ `bin/compare_imgs` で、画像を 1 枚の一覧にする。
+プラグインに同梱したコマンド `compare_imgs` で、画像を 1 枚の一覧にする。
 
-このスキルのベースディレクトリ（スキルを読み込んだときに示される「Base directory for this skill」）を `D` として、`$D/bin/compare_imgs` を呼ぶ。
+プラグインが有効な間は PATH に入っているので、名前だけで呼べる。
 
 ```sh
-"$D/bin/compare_imgs" [-w 幅px] [-h 高さpx] -o 出力 -i 画像1 [ラベル1] -i 画像2 [ラベル2] ...
+compare_imgs [-w 幅px] [-h 高さpx] -o 出力 -i 画像1 [ラベル1] -i 画像2 [ラベル2] ...
 ```
 
 - `-w` `-h`：一覧の最大の大きさ（既定 2400x1600）。片方だけなら、もう片方は 2:3 の比で決まる
@@ -44,4 +44,4 @@ description: 複数の画像を、番号・ラベル・パス付きで 1 枚に�
 ## 作り直すとき
 
 ソースは `src/`（Go）。直したら、リポジトリのルートで `scripts/build.sh` を実行し、同梱するバイナリを全アーキテクチャ分作り直す。
-`bin/compare_imgs` は OS とアーキテクチャを見て `bin/compare_imgs-<os>-<arch>` を呼ぶラッパー。
+`bin/compare_imgs`（プラグインのルート）は、OS とアーキテクチャを見て `libexec/compare_imgs-<os>-<arch>` を呼ぶラッパー。
