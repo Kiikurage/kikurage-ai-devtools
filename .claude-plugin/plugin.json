@@ -1,6 +1,6 @@
 {
   "name": "kikurage-ai-devtools",
-  "version": "4.0.0",
+  "version": "4.2.0",
   "description": "kikurage の Claude Code 用スキル・フック・作業方針をまとめたプラグイン。画像の拡大（zoom-img）・並べた比較（compare-imgs）、画像を読んだあとの注意、英語の返答の差し戻し、作業方針のコンテキスト注入を含む。",
   "author": {
     "name": "ykikura"
